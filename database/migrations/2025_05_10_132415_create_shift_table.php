@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('login', function (Blueprint $table) {
+        Schema::create('shift', function (Blueprint $table) {
             $table->id(); // Primary Key
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->unsignedBigInteger('roles'); // Foreign Key ke roles
-            $table->rememberToken();
+            $table->string('name'); // Nama shift, misal: "Shift Pagi"
+            $table->time('start_time'); // Jam mulai shift
+            $table->time('end_time');   // Jam selesai shift
+            $table->text('description')->nullable(); // Keterangan tambahan
             $table->timestamps();
-
-
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('login');
+        Schema::dropIfExists('shift');
     }
 };
