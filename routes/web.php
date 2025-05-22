@@ -2,10 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\AbsensiController;
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    return redirect('/karyawan');
+});
+
+Route::resource('/karyawan', KaryawanController::class);
+Route::get('/absensi', [AbsensiController::class, 'index']);
+Route::post('/absensi/masuk', [AbsensiController::class, 'absenMasuk']);
+Route::post('/absensi/pulang', [AbsensiController::class, 'absenPulang']);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
